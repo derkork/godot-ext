@@ -171,3 +171,15 @@ var connection = button
 // later...    
 connection.Disconnect();    
 ```
+
+### Miscellaneous
+
+`Clone` is a type-safe variant of `Duplicate`:
+
+```csharp
+var monsterClone = monster.Duplicate() as Monster;
+
+// becomes
+var monsterClone = monster.Clone(); // no casting necessary
+
+```
