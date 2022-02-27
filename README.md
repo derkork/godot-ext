@@ -2,6 +2,14 @@
 
 This library contains a set of useful extension methods that augment Godot's C# API to make it easier to use and more type-safe. The extension methods are defined for a handful of types. 
 
+## Installation
+
+GodotExt is published on NuGet. To add it use this command line command (or the NuGet facilities of your IDE):
+
+```bash
+dotnet add package GodotExt --version 0.0.1
+```
+
 ## What's inside
 ### Finding nodes
 
