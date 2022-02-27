@@ -7,6 +7,11 @@
     <Description>This library adds extension methods to many Godot built-in types to make the API more typesafe and easier to use.</Description>
     <PackageVersion>0.0.1</PackageVersion>
     <PackageReleaseNotes>This is an early version. While it is working API may change. </PackageReleaseNotes>
+    <Copyright>(C) 2022 Jan Thomä</Copyright>
+    <PackageProjectUrl>https://github.com/derkork/godot-ext</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/derkork/godot-ext/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/derkork/godot-ext</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
