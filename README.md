@@ -34,6 +34,13 @@ var button = this.WithName<Button>("Button");
 `GetChildNodes<T>` is a type-safe replacement for `GetChildren`. It will only return nodes of the given type back:
 
 ```csharp
+foreach(var child in this.GetChildren()) {
+   if (child is Button button) {
+      button.Disabled = true;
+   }
+}
+
+// becomes   
 
 foreach(var button in this.GetChildNodes<Button>()) {
     button.Disabled = true;
