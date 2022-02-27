@@ -1,0 +1,17 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>8</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>GodotExt - A set of extensions for the Godot C# API</Title>
+    <Description>This library adds extension methods to many Godot built-in types to make the API more typesafe and easier to use.</Description>
+    <PackageVersion>0.0.1</PackageVersion>
+    <PackageReleaseNotes>This is an early version. While it is working API may change. </PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
+  </ItemGroup>
+</Project>
