@@ -138,8 +138,7 @@ button
     .Connect("pressed")
     .To(this, nameof(OnButtonPressed));
 ```
-
-This API allows for easier additional binds and binding flags, which can use the actual enum's instead of `uint`s and don't require you to manually create Godot's `Array` instances:
+In addition to the vanilla API it also directly checks for errors during binding and throws an exception if the binding fails instead of silently failing. Also, this API allows for easier additional binds and binding flags, which can use the actual enum's instead of `uint`s and don't require you to manually create Godot's `Array` instances:
 
 ```csharp
 button.Connect(
