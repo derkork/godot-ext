@@ -173,6 +173,8 @@ connection.Disconnect();
 
 ### Miscellaneous
 
+#### Type-safe cloning of nodes
+
 `Clone` is a type-safe variant of `Duplicate`:
 
 ```csharp
@@ -182,3 +184,30 @@ var monsterClone = monster.Duplicate() as Monster;
 var monsterClone = monster.Clone(); // no casting necessary
 
 ```
+
+#### 2D World-Screen transformations on `ViewPort`
+
+`Viewport` has some extensions that allow you to quickly transform screen coordinates to a world coordinates:
+
+```csharp
+var worldCoordinates = GetGlobalMousePosition() * viewport.CanvasTransform;
+
+// becomes
+
+var worldCoordinates = viewport.ScreenToWorld(GetGlobalMousePosition());
+```
+
+and the reverse is also possible:
+
+
+```csharp
+var playerPositionOnScreen = viewport.CanvasTransform * player.position;
+
+// becomes
+
+var playerPositionOnScreen = viewport.WorldToScreen(player.position);
+```
+
+
+
+
