@@ -7,7 +7,7 @@ This library contains a set of useful extension methods that augment Godot's C# 
 GodotExt is published on [NuGet](https://www.nuget.org/packages/GodotExt). To add it use this command line command (or the NuGet facilities of your IDE):
 
 ```bash
-dotnet add package GodotExt --version 0.0.1
+dotnet add package GodotExt --version 0.1.0
 ```
 
 ## What's inside
