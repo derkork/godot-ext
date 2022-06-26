@@ -5,18 +5,21 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>GodotExt - A set of extensions for the Godot C# API</Title>
     <Description>This library adds extension methods to many Godot built-in types to make the API more typesafe and easier to use.</Description>
-    <PackageVersion>0.0.1</PackageVersion>
+    <PackageVersion>0.1.0</PackageVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>This is an early version. While it is working API may change. </PackageReleaseNotes>
     <Copyright>(C) 2022 Jan Thomä</Copyright>
     <PackageProjectUrl>https://github.com/derkork/godot-ext</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/derkork/godot-ext/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/derkork/godot-ext</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CHANGES.md" />
     <Content Include="README.md" />
+    <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>

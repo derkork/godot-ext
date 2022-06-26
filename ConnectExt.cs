@@ -34,6 +34,11 @@ namespace GodotExt
                 _signal = signal;
             }
 
+            /// <summary>
+            /// Adds additional parameters which will be given to the target method after the signal parameters.
+            /// Note that calling this multiple times will overwrite the previous values, so all parameter values
+            /// should be given in a single call.
+            /// </summary>
             [MustUseReturnValue]
             public ConnectBinding WithBinds(params object[] binds)
             {
@@ -41,6 +46,10 @@ namespace GodotExt
                 return this;
             }
 
+            /// <summary>
+            /// Adds connect flags to the signal binding. See <see cref="Object.ConnectFlags"/> for a list of
+            /// available flags. Note that calling this multiple times will overwrite the previous values.
+            /// </summary>
             [MustUseReturnValue]
             public ConnectBinding WithFlags(params Object.ConnectFlags[] flags)
             {
@@ -48,6 +57,9 @@ namespace GodotExt
                 return this;
             }
 
+            /// <summary>
+            /// Finishes the signal binding and returns a binding object which can be used to disconnect the signal later.
+            /// </summary>
             public ConnectedBinding To(Object target, string method)
             {
                 var result = _source.Connect(_signal, target, method, _binds, _flags);
@@ -72,6 +84,9 @@ namespace GodotExt
                 _method = method;
             }
 
+            /// <summary>
+            /// Disconnects the signal binding.
+            /// </summary>
             public void Disconnect()
             {
                 _source.Disconnect(_signal, _target, _method);

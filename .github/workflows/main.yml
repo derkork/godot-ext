@@ -1,0 +1,37 @@
+name: main
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Build:
+    name: Build
+    runs-on:  ubuntu-latest
+    container: barichello/godot-ci:mono-3.4.4
+    steps:
+      - uses: actions/checkout@v2
+      # Workaround for https://github.com/abarichello/godot-ci/issues/80
+      - name: Install dotnet tools
+        run: |       
+          wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update -qq
+          apt-get install -y apt-transport-https
+          apt-get update -qq
+          apt-get install -y dotnet-sdk-6.0
+      - name: Install Dependencies
+        run: |
+          nuget restore
+          mkdir -p .mono/assemblies/Debug
+          cp /usr/local/bin/GodotSharp/Api/Release/* .mono/assemblies/Debug
+      - name: publish on version change
+        id: publish_nuget
+        # workaround for https://github.com/brandedoutcast/publish-nuget/issues/76
+        uses: alirezanet/publish-nuget@v3.0.4
+        with:
+            # Filepath of the project to be packaged, relative to root of repository
+            PROJECT_FILE_PATH: GodotExt.csproj
+            VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
+            NUGET_KEY: ${{ secrets.NUGET_KEY }}

@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using JetBrains.Annotations;
 
@@ -13,12 +14,32 @@ namespace GodotExt
         /// Creates a one-off timer for the given amount of time that can be awaited.
         /// </summary>
         [MustUseReturnValue]
+        [Obsolete("use SleepSeconds instead")]
         public static SignalAwaiter Sleep(this Node source, float sleepTime)
+        {
+            return source.SleepSeconds(sleepTime);
+        }
+
+        /// <summary>
+        /// Creates a one-off timer for the given amount of time that can be awaited.
+        /// </summary>
+        [MustUseReturnValue]
+        public static SignalAwaiter SleepSeconds(this Node source, float sleepTime)
         {
             GdAssert.That(source.IsInsideTree(), "source.IsInsideTree()");
             return source.GetTree().CreateTimer(sleepTime).Timeout();
         }
 
+        /// <summary>
+        /// Creates a one-off timer for the given amount of time that can be awaited.
+        /// </summary>
+        [MustUseReturnValue]
+        public static SignalAwaiter SleepSeconds(this SceneTree source, float sleepTime)
+        {
+            return source.CreateTimer(sleepTime).Timeout();
+        }
+
+        
         /// <summary>
         /// Returns a <see cref="SignalAwaiter"/> that waits until this Timer
         /// runs into a timeout.

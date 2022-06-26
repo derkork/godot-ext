@@ -86,6 +86,37 @@ node.QueueFree();
 node.RemoveAndFree();
 ```
 
+### Nodes in groups
+`FindBelowInGroup` finds all nodes below a given node that are in a given group:
+
+```csharp
+var myNode = ...; // this is the node below which we want to find all nodes that are in a certain group
+
+var nodesInGroup = GetTree().GetNodesInGroup("SomeGroup");
+var result = new List<Node>();
+foreach (var node in nodesInGroup) {
+    if (myNode.IsAParentOf(node)) {
+        result.Add(node);
+    }
+}
+
+// becomes
+
+var nodesInGroup = myNode.FindBelowInGroup("SomeGroup");
+```
+
+`GetNodesInGroup` gets an override that will filter the group nodes to only return nodes of the given type:
+
+```csharp
+
+var enemies = GetTree().GetNodesInGroup("SomeGroup")
+    .OfType<Enemy>();
+    
+// becomes
+
+var enemies = GetTree().GetNodesInGroup<Enemy>("SomeGroup");
+```    
+
 ### Signals
 `FiresSignal` provides a better-readable alternative to the built-in `ToSignal`  when you want to wait for a certain signal with `await`.
 
@@ -102,10 +133,10 @@ For timers and tweens there are additional methods that make using them easier:
 
 ```csharp
 // make a one-off 500ms timer and wait on it
-await ToSignal(GetTree().CreateTimer(500), "timeout");
+await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 
 // becomes
-await this.Sleep(500);
+await this.Sleep(0.5);
 ```
 ```csharp
 await ToSignal(timer, "timeout");
@@ -184,6 +215,19 @@ var monsterClone = monster.Duplicate() as Monster;
 var monsterClone = monster.Clone(); // no casting necessary
 
 ```
+
+#### Snake-case conversion for `CallDeferred`
+
+When calling Godot-API through `CallDeferred` you need to translate the method name into snake-case. This can easily introduce typos. Therefore `string` gets an extension method that converts the string to snake-case:
+
+```csharp
+someNode.CallDeferred("someMethod", new Array(1, 2, 3));
+
+// becomes
+someNode.CallDeferred(nameof(SomeNode.SomeMethod).ToSnakeCase(), new Array(1, 2, 3));
+```
+
+As an additional bonus the deferred call will now also appear in the usage search of your IDE.
 
 #### 2D World-Screen transformations on `ViewPort`
 

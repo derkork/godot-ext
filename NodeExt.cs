@@ -188,8 +188,7 @@ namespace GodotExt
         public static IEnumerable<T> FindBelowInGroup<T>(this Node parent, string group) where T : Node
         {
             return parent.GetTree()
-                .GetNodesInGroup(group)
-                .Cast<T>()
+                .GetNodesInGroup<T>(group)
                 .Where(parent.IsAParentOf);
         }
 
