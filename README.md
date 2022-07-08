@@ -7,7 +7,15 @@ This library contains a set of useful extension methods that augment Godot's C# 
 GodotExt is published on [NuGet](https://www.nuget.org/packages/GodotExt). To add it use this command line command (or the NuGet facilities of your IDE):
 
 ```bash
-dotnet add package GodotExt --version 0.1.0
+dotnet add package GodotExt --version 0.2.0
+```
+
+If you are targeting `netstandard2.1` also add the following lines to your `.csproj` file to make it work with Godot:
+
+```xml
+<PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+</PropertyGroup>
 ```
 
 ## What's inside
@@ -28,6 +36,20 @@ var button = FindNode<Button>("Button", true, false);
 // becomes
 var button = this.WithName<Button>("Button");
 ```
+
+You can use `FindAllDescendants` and `FindClosestDescendants` to find all nodes in a subtree that are of a certain type and match additional criteria.
+
+```csharp
+// find the red buttons below the current node
+var allRedButtons = FindAllDescendants<Button>(b => b.GetColor() == Color.Red);
+
+// find the outermost containers that are in the "Alpha" group
+var allContainersInGroupAlpha = FindClosestDescendants<Container>(c => c.IsInGroup("Alpha"));
+```
+
+The difference between `FindAllDescendants` and `FindClosestDescendants` is that `FindAllDescendants` will return all nodes in the whole sub-tree that match the criteria, while `FindClosestDescendants` will return the first node in each branch of the sub-tree that matches the criteria (e.g. `FindClosestDescendants`  will stop searching a branch when it has found a match). 
+
+Also, be aware that these functions traverse the node tree so they can be expensive and should not be used in tight loops. Their main use case is for saving games where they allow you to quickly find interesting nodes in the tree that need saving and where it is ok to wait a few milliseconds for the result.
 
 ### Parent-child relationships
 
