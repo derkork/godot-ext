@@ -83,6 +83,25 @@ airship.AddChild(player);
 player.MoveToNewParent(airship);
 ```
 
+`MoveToNewParentKeepPosition` moves a `Node2D` to a new parent, keeping its global position and rotation
+
+```csharp
+
+var playerPosition = player.GlobalPosition;
+var playerRotation = player.GlobalRotation;
+
+player.GetParent().RemoveChild(player);
+
+airship.AddChild(player);
+
+player.GlobalPosition = playerPosition;
+player.GlobalRotation = playerRotation;
+
+// becomes
+
+player.MoveToNewParentKeepPosition(airship);
+```
+
 `RemoveFromParent` removes a node from its parent:
 
 ```csharp
