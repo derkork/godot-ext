@@ -1,3 +1,5 @@
+**Note: this package is no longer maintained and will not work with the latest Godot versions. You can either fork it or just copy some snippets for your own project.**
+
 # GodotExt - Extension methods for the Godot C# API
 
 This library contains a set of useful extension methods that augment Godot's C# API to make it easier to use and more type-safe. The extension methods are defined for a handful of types. 
